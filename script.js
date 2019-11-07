@@ -134,7 +134,7 @@ $(document).ready(function () {
 
     // Function to display 5-day forecast
 
-    function displayFiveDayForecast() {
+    function displayFiveDayForecastDate() {
 
 
         var forecastCard = $("#forecast-card").siblings()
@@ -188,8 +188,6 @@ $(document).ready(function () {
 
         forecastCard.append(humidityForecast)
 
-
-        
 
         // Ending curly bracket for displayFiveDayForecast
     }
@@ -283,7 +281,7 @@ function fiveDayForecastTemp(inputCityName) {
 
         displayCurrentWeather(inputCityName);
         displaySearchedCity(inputCityName);
-        displayFiveDayForecast();
+        displayFiveDayForecastDate();
         fiveDayForecastTemp(inputCityName)
         console.log(cityArray)
 
@@ -291,16 +289,29 @@ function fiveDayForecastTemp(inputCityName) {
 
 
 
-    // Closing curly bracket for document ready function
-})
 
 // Listening for a click on a searched city to display that city's weather again
-$("#new-city-p").on("click", function(event){
+
+
+$(".city-card-body").on("click", ".new-city-p",function(event){
+   
     console.log("hello");
+
+    event.preventDefault();
+
+    // if
+
+    // displayCurrentWeather(inputCityName);
+    // displayFiveDayForecast();
+    // fiveDayForecastTemp(inputCityName)  
+    // I WANT TO UNDERSTAND WHY I CAN'T I CAN'T USE THE ABOVE FUNCTIONS IN THIS CLICK EVENT. CONSOLE SAYS THESE FUNCTION'S AREN'T DEFINED
+ 
 
 })
 
 
+    // Closing curly bracket for document ready function
+})
 // TO DO:
 // UV INDEX
 // SEARCH ICON
