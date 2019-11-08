@@ -37,7 +37,6 @@ $(document).ready(function () {
 
                 // Create a var for weather-info div
 
-            
                 var weatherInfo = $(".weather-info");
 
                 console.log(weatherInfo);
@@ -70,7 +69,7 @@ $(document).ready(function () {
 
                 var windResponse = response.wind.speed;
 
-                console.log("response is: " , response)
+                console.log("response is: ", response)
 
                 // Create div to display wind
 
@@ -85,14 +84,6 @@ $(document).ready(function () {
             });
     }
 
-// function geographicCoordinates(inputCityName) {
-
-//     var query
-//      = 
-
-// }
-
-
     // Function to get the stored city to display on the left:
     // newCity is a local variable to that function
 
@@ -100,17 +91,11 @@ $(document).ready(function () {
 
         $(".city-card-body").empty();
 
-
         console.log(cityArray);
-
-
 
         localStorage.setItem("searchedCity", JSON.stringify(cityArray))
 
-    
-
-
-         // for loop over the cityarry and then dynamically append each item in the array to the city-card-body. 
+        // for loop over the cityarry and then dynamically append each item in the array to the city-card-body. 
 
         for (var i = 0; i < cityArray.length; i++) {
             var cityName = $("<p>");
@@ -129,136 +114,40 @@ $(document).ready(function () {
         }
     }
 
-    // Display 5-day forecast
-
-    function displayFiveDayForecastDate() {
-
-
-        // var forecastCard = $("#forecast").siblings()
-
-        // console.log(forecastCard);
-
-        // $(".forecast").empty()
-        
-
-        var dayOne = $("#day-one");
-        var dayTwo = $("#day-two");
-        var dayThree = $("#day-three");
-        var dayFour = $("#day-four");
-        var dayFive = $("#day-five");
-
-        $("#day-one").empty()
-        $("#day-two").empty()
-        $("#day-three").empty()
-        $("#day-four").empty()
-        $("#day-five").empty()
-
-       
-
-        $(dayOne).text(moment().add(1, 'days').format('MM/DD/YYYY'))
-        $(dayTwo).text(moment().add(2, 'days').format('MM/DD/YYYY'))
-        $(dayThree).text(moment().add(3, 'days').format('MM/DD/YYYY'))
-        $(dayFour).text(moment().add(4, 'days').format('MM/DD/YYYY'))
-        $(dayFive).text(moment().add(5, 'days').format('MM/DD/YYYY'))
-
-        var forecastArray = [dayOne, dayTwo, dayThree, dayFour, dayFive];
-
-        for (var i = 0; i < forecastArray.length; i++) {
-var forecastCards = $("<div>");
-
-forecastCards.addClass("forecastDay");
-forecastCards.attr(forecastArray[i]);
-        
-// AND THEN HOW TO I ADD THE DATES FROM MOMENTJS AND THEN THE API CALLS?
-
-}
-
-        // var tempForecastResponse = 
-        // ADD ABOVE INTO BELOW VAR
-
     
-        var tempForecast = $("<div>").text("Temp: " + "℉")
-
-        // forecastCard.append(tempForecast)
-
-        // dayOne.append(tempForecast)
-        // dayTwo.append(tempForecast)
-        // dayThree.append(tempForecast)
-        // dayFour.append(tempForecast)
-        // dayFive.append(tempForecast)
-
-        // var weatherIcon = $("<div>").text("Weather Icon")
-
-        // forecastCard.append(weatherIcon)
-
-        //    tempForecast.append(weatherIcon)
-
-
-        // var humidityForecastResponse = 
-        // ADD ABOVE INTO BELOW VAR
-        // var humidityForecast = $("<div>").text("Humidity: " + "%")
-
-        // forecastCard.append(humidityForecast)
-
-
-        // Ending curly bracket for displayFiveDayForecast
-    }
-
-
-    // NEED A FUNCTION  HERE FOR DISPLAYING 5-DAY ICONS
-
-//
     // Function to display 5-day forecast temperatures calling OpenWeather:
 
-function fiveDayForecastTemp(inputCityName) {
-    var queryTemp = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputCityName + "&APPID=" + APIKey;
+    function fiveDayForecast(inputCityName) {
+        var queryTemp = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputCityName + "&APPID=" + APIKey;
 
-    // Run AJAX call to the OpenWeatherMap API
+        // Run AJAX call to the OpenWeatherMap API
         $.ajax({
             url: queryTemp,
             method: "GET"
         })
 
-       
-// Store retrieved data inside of an object called "responseTemp"
+            // Store retrieved data inside of an object called "responseTemp"
 
-.then (function (responseTemp){
+            .then(function (responseTemp) {
 
-    console.log(responseTemp)
+                console.log(responseTemp)
 
-       for (var i = 0; i < 5; i++) {
+                for (var i = 0; i < 5; i++) {
 
-            console.log(responseTemp.list[i].main.temp)
+                    console.log(responseTemp.list[i].main.temp)
 
-            var convertTime = 
+                    var convertTime =
 
-// Feed a date to moment and convert it- hoe to feed it an unformatted date   maybe moment.format
+                        // Feed a date to moment and convert it- how to feed it an unformatted date   maybe moment.format
 
-        $(".forecastCards").append("<div class='col-sm-2 cardDay'><p> +"+responseTemp.list[i].dt+ "</p></div>")
+                        $(".forecastCards").append("<div class='col-sm-2 cardDay'>test<p>+" + responseTemp.list[i].dt + "</p></div>")
 
+                    // I AM NOT DOING THE BELOW RIGHT
+                    // $(".forecastCards").empty()
 
-        }
-
-        // Create var for temperature response
-
-        var tempResponse = response.main.temp;
-
-    // }
-    // )}
-
-})
-}
-
-
-    // //    Function to display 5-day forecast humidity calling OpenWeather:
-
-    // function fiveDayForecastHumidity(humidity) {
-
-    // var humidityOne = $(".one-humidity");
-    // var humidityTwo = $(".two-humidity");
-    // var humidityThree = $(".three-humidity");
-    // var humidityFour = $(".four-humidity");
-    // var humidityFive = $(".five-humidity");
+                }
+            })
+    }
 
     // var queryHumidity = "api.openweathermap.org/data/2.5/forecast.humidity?q=" + inputCityName + "&APPID=" + APIKey;
 
@@ -267,7 +156,6 @@ function fiveDayForecastTemp(inputCityName) {
     //     url: queryHumidity,
     //     method: "GET"
     // })
-
     // }
 
 
@@ -286,56 +174,45 @@ function fiveDayForecastTemp(inputCityName) {
 
         var todayDate = $('.today-date');
         console.log(todayDate)
-        
+
 
         $(todayDate).text(" (" + (moment().format('MM/DD/YYYY')) + ")")
 
-        
-
-        // 5-Day Forecast
+        // 5-Day Forecast heading text
 
         var fiveDayText = $('#five-day-text')
         console.log(fiveDayText)
         $(fiveDayText).text("5-Day Forecast: ")
 
-
         // Call functions
 
         displayCurrentWeather(inputCityName);
         displaySearchedCity(inputCityName);
-        // displayFiveDayForecastDate();
-        fiveDayForecastTemp(inputCityName)
+        fiveDayForecast(inputCityName)
         console.log(cityArray)
 
     });
 
 
+    // CLICK EVENT FOR previously searched city to display that city's weather again
 
+    $(".city-card-body").on("click", ".new-city-p", function (event) {
 
-// Listening for a click on a searched city to display that city's weather again
+        console.log(event.currentTarget.innerText);
 
+        event.preventDefault();
+        $(".city").text(event.currentTarget.innerText);
+        displayCurrentWeather(event.currentTarget.innerText);
 
-$(".city-card-body").on("click", ".new-city-p",function(event){
-   
-    console.log(event.currentTarget.innerText);
-
-    event.preventDefault();
-    $(".city").text(event.currentTarget.innerText);
-    displayCurrentWeather(event.currentTarget.innerText);
-
-    // displayFiveDayForecast();
-    // fiveDayForecastTemp(inputCityName)  
-    // I WANT TO UNDERSTAND WHY I CAN'T I CAN'T USE THE ABOVE FUNCTIONS IN THIS CLICK EVENT. CONSOLE SAYS THESE FUNCTION'S AREN'T DEFINED
- 
-
-})
+    })
 
 
     // Closing curly bracket for document ready function
 })
 // TO DO:
-// UV INDEX
-// SEARCH ICON
-// NEED TO DO THE 5-DAY FORECAST
-// NEED ICONS IN 5-DAY FORECAST
-// MAKE PREVIOUSLY SEARCHED CITY CLICK EVENT
+// Fix search icon
+// Add icons to current weather
+// Add humidty to 5-day forecast
+// Icons for 5-day forecast
+// Clear input box
+// Emplty the 5-day forecast
