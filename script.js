@@ -100,20 +100,17 @@ $(document).ready(function () {
 
         $(".city-card-body").empty();
 
-        // var cityArray = storedCity.split(",")
 
         console.log(cityArray);
 
 
-        // Setting to local storage. "searchedCity" in quotes, so it's not searching for a variable.
 
         localStorage.setItem("searchedCity", JSON.stringify(cityArray))
 
-        // var storedCity = (JSON.parse(localStorage.getItem(cityArray[i])));
-        // console.log(storedCity);
+    
 
 
-        // // for loop over the cityarry and then dynamically append each item in the array to the city-card-body. 
+         // for loop over the cityarry and then dynamically append each item in the array to the city-card-body. 
 
         for (var i = 0; i < cityArray.length; i++) {
             var cityName = $("<p>");
@@ -132,16 +129,17 @@ $(document).ready(function () {
         }
     }
 
-    // Function to display 5-day forecast
+    // Display 5-day forecast
 
     function displayFiveDayForecastDate() {
 
 
-        var forecastCard = $("#forecast-card").siblings()
+        // var forecastCard = $("#forecast").siblings()
 
-        console.log(forecastCard);
+        // console.log(forecastCard);
 
-        // $("#forecast-card").empty()
+        // $(".forecast").empty()
+        
 
         var dayOne = $("#day-one");
         var dayTwo = $("#day-two");
@@ -155,11 +153,25 @@ $(document).ready(function () {
         $("#day-four").empty()
         $("#day-five").empty()
 
+       
+
         $(dayOne).text(moment().add(1, 'days').format('MM/DD/YYYY'))
         $(dayTwo).text(moment().add(2, 'days').format('MM/DD/YYYY'))
         $(dayThree).text(moment().add(3, 'days').format('MM/DD/YYYY'))
         $(dayFour).text(moment().add(4, 'days').format('MM/DD/YYYY'))
         $(dayFive).text(moment().add(5, 'days').format('MM/DD/YYYY'))
+
+        var forecastArray = [dayOne, dayTwo, dayThree, dayFour, dayFive];
+
+        for (var i = 0; i < forecastArray.length; i++) {
+var forecastCards = $("<div>");
+
+forecastCards.addClass("forecastDay");
+forecastCards.attr(forecastArray[i]);
+        
+// AND THEN HOW TO I ADD THE DATES FROM MOMENTJS AND THEN THE API CALLS?
+
+}
 
         // var tempForecastResponse = 
         // ADD ABOVE INTO BELOW VAR
@@ -169,30 +181,33 @@ $(document).ready(function () {
 
         // forecastCard.append(tempForecast)
 
-        dayOne.append(tempForecast)
-        dayTwo.append(tempForecast)
-        dayThree.append(tempForecast)
-        dayFour.append(tempForecast)
-        dayFive.append(tempForecast)
+        // dayOne.append(tempForecast)
+        // dayTwo.append(tempForecast)
+        // dayThree.append(tempForecast)
+        // dayFour.append(tempForecast)
+        // dayFive.append(tempForecast)
 
-        var weatherIcon = $("<div>").text("Weather Icon")
+        // var weatherIcon = $("<div>").text("Weather Icon")
 
-        forecastCard.append(weatherIcon)
+        // forecastCard.append(weatherIcon)
 
-           tempForecast.append(weatherIcon)
+        //    tempForecast.append(weatherIcon)
 
 
         // var humidityForecastResponse = 
         // ADD ABOVE INTO BELOW VAR
-        var humidityForecast = $("<div>").text("Humidity: " + "%")
+        // var humidityForecast = $("<div>").text("Humidity: " + "%")
 
-        forecastCard.append(humidityForecast)
+        // forecastCard.append(humidityForecast)
 
 
         // Ending curly bracket for displayFiveDayForecast
     }
 
 
+    // NEED A FUNCTION  HERE FOR DISPLAYING 5-DAY ICONS
+
+//
     // Function to display 5-day forecast temperatures calling OpenWeather:
 
 function fiveDayForecastTemp(inputCityName) {
@@ -211,15 +226,22 @@ function fiveDayForecastTemp(inputCityName) {
 
     console.log(responseTemp)
 
-   //     for (var i = 0; i < 5; i++) {
+       for (var i = 0; i < 5; i++) {
 
-    //         console.log(responseTemp.list[i].main.temp)
+            console.log(responseTemp.list[i].main.temp)
 
-    //     }
+            var convertTime = 
 
-    //     // Create var for temperature response
+// Feed a date to moment and convert it- hoe to feed it an unformatted date   maybe moment.format
 
-    //     var tempResponse = response.main.temp;
+        $(".forecastCards").append("<div class='col-sm-2 cardDay'><p> +"+responseTemp.list[i].dt+ "</p></div>")
+
+
+        }
+
+        // Create var for temperature response
+
+        var tempResponse = response.main.temp;
 
     // }
     // )}
@@ -281,7 +303,7 @@ function fiveDayForecastTemp(inputCityName) {
 
         displayCurrentWeather(inputCityName);
         displaySearchedCity(inputCityName);
-        displayFiveDayForecastDate();
+        // displayFiveDayForecastDate();
         fiveDayForecastTemp(inputCityName)
         console.log(cityArray)
 
@@ -295,13 +317,12 @@ function fiveDayForecastTemp(inputCityName) {
 
 $(".city-card-body").on("click", ".new-city-p",function(event){
    
-    console.log("hello");
+    console.log(event.currentTarget.innerText);
 
     event.preventDefault();
+    $(".city").text(event.currentTarget.innerText);
+    displayCurrentWeather(event.currentTarget.innerText);
 
-    // if
-
-    // displayCurrentWeather(inputCityName);
     // displayFiveDayForecast();
     // fiveDayForecastTemp(inputCityName)  
     // I WANT TO UNDERSTAND WHY I CAN'T I CAN'T USE THE ABOVE FUNCTIONS IN THIS CLICK EVENT. CONSOLE SAYS THESE FUNCTION'S AREN'T DEFINED
