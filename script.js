@@ -114,11 +114,12 @@ $(document).ready(function () {
         }
     }
 
-    
+
     // Function to display 5-day forecast temperatures calling OpenWeather:
 
     function fiveDayForecast(inputCityName) {
-        var queryTemp = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputCityName + "&APPID=" + APIKey;
+        var queryTemp = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputCityName + "&APPID=" + APIKey + "&units=imperial";
+        var queryConditionImage = 
 
         // Run AJAX call to the OpenWeatherMap API
         $.ajax({
@@ -136,14 +137,22 @@ $(document).ready(function () {
 
                     console.log(responseTemp.list[i].main.temp)
 
-                    var convertTime =
+                    // Feed a date to moment and convert it- how to feed it an unformatted date   maybe moment.format
 
-                        // Feed a date to moment and convert it- how to feed it an unformatted date   maybe moment.format
+                    // var convertDate = moment().responseTemp.list[i].dt.format('MM/DD/YYYY')
+                    // console.log(convertDate)
+                
 
-                        $(".forecastCards").append("<div class='col-sm-2 cardDay'>test<p>+" + responseTemp.list[i].dt + "</p></div>")
+                    // Variables for forecast data:
+                    var forecastDate = responseTemp.list[i].dt;
+                    var conditionImage = "Image"
+                    var forecastTemp = responseTemp.list[i].main.temp;
+                    var forecastHumidity = responseTemp.list[i].main.humidity;
+
+                    $(".forecastCards").append("<div class='col-sm-2 cardDay'><p>" + forecastDate + "</p><p>" + conditionImage + "</p><p>" + 'Temp: ' + forecastTemp + '℉' + "</p><p>" + 'Humidity: ' + forecastHumidity + '%' + "</p></div>")
 
                     // I AM NOT DOING THE BELOW RIGHT
-                    // $(".forecastCards").empty()
+                  
 
                 }
             })
@@ -170,13 +179,16 @@ $(document).ready(function () {
         var inputCityName = $("#city-input").val().trim();
         cityArray.push(inputCityName);
 
-        $(".city").text((inputCityName) + " ")
+        $(".city").text((inputCityName))
+
+        // Below I want to make inputCityName an H1 or Bold
+        // inputCityName.addClass("")
 
         var todayDate = $('.today-date');
         console.log(todayDate)
 
 
-        $(todayDate).text(" (" + (moment().format('MM/DD/YYYY')) + ")")
+        $(todayDate).text("\t" + "(" + (moment().format('MM/DD/YYYY')) + ")")
 
         // 5-Day Forecast heading text
 
