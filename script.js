@@ -119,45 +119,64 @@ $(document).ready(function () {
 
     function fiveDayForecast(inputCityName) {
         var queryTemp = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputCityName + "&APPID=" + APIKey + "&units=imperial";
-        var queryConditionImage = 
+        var queryConditionImage =
 
-        // Run AJAX call to the OpenWeatherMap API
-        $.ajax({
-            url: queryTemp,
-            method: "GET"
-        })
-
-            // Store retrieved data inside of an object called "responseTemp"
-
-            .then(function (responseTemp) {
-
-                console.log(responseTemp)
-
-                for (var i = 0; i < 5; i++) {
-
-                    console.log(responseTemp.list[i].main.temp)
-
-                    // Feed a date to moment and convert it- how to feed it an unformatted date   maybe moment.format
-
-                    // var convertDate = moment().responseTemp.list[i].dt.format('MM/DD/YYYY')
-                    // console.log(convertDate)
-                
-
-                    // Variables for forecast data:
-                    var forecastDate = responseTemp.list[i].dt;
-                    var conditionImage = "Image"
-                    var forecastTemp = responseTemp.list[i].main.temp;
-                    var forecastHumidity = responseTemp.list[i].main.humidity;
-
-                    $(".forecastCards").append("<div class='col-sm-2 cardDay'><p>" + forecastDate + "</p><p>" + conditionImage + "</p><p>" + 'Temp: ' + forecastTemp + '℉' + "</p><p>" + 'Humidity: ' + forecastHumidity + '%' + "</p></div>")
-
-                    // I AM NOT DOING THE BELOW RIGHT
-
-                    // $(".forecastCards").empty()
-                  
-
-                }
+            // Run AJAX call to the OpenWeatherMap API
+            $.ajax({
+                url: queryTemp,
+                method: "GET"
             })
+
+                // Store retrieved data inside of an object called "responseTemp"
+
+                .then(function (responseTemp) {
+
+                    console.log(responseTemp)
+
+                    $(".forecastCards").empty();
+
+                    for (var i = 0; i < 5; i++) {
+
+                        console.log(responseTemp.list[i].main.temp);
+
+
+
+                        // Variables for forecast data:
+                        var forecastDate = responseTemp.list[i].dt_txt.slice(0, 10);
+                        // var conditionImage = "Image";
+                        var forecastTemp = responseTemp.list[i].main.temp;
+                        var forecastHumidity = responseTemp.list[i].main.humidity;
+                        var iconcode = responseTemp.list[i].weather[0].icon;
+                        console.log(iconcode);
+                        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+
+                        var cardContent =
+                            "<div class='col-sm-2 cardDay'><p>" +
+                            forecastDate +
+                            "</p><p>" +
+                            '<img src="' + iconurl + '" />' +
+                            "</p><p>" +
+                            "Temp: " +
+                            forecastTemp +
+                            '℉' +
+                            "</p><p>" +
+                            'Humidity: ' +
+                            forecastHumidity +
+                            '%' +
+                            "</p></div>";
+
+
+                        $(".forecastCards").append(cardContent);
+
+                        // $(".forecastCards").append("<div class='col-sm-2 cardDay'><p>" + forecastDate + "</p><p>" + conditionImage + "</p><p>" + 'Temp: ' + forecastTemp + '℉' + "</p><p>" + 'Humidity: ' + forecastHumidity + '%' + "</p></div>");
+
+
+
+
+
+
+                    }
+                })
     }
 
     // var queryHumidity = "api.openweathermap.org/data/2.5/forecast.humidity?q=" + inputCityName + "&APPID=" + APIKey;
@@ -190,7 +209,7 @@ $(document).ready(function () {
         var todayDate = $('.today-date');
         console.log(todayDate)
 
-// I AM TRYING TO MAKE A SPACE BETWEEN CITY AND DATE:
+        // I AM TRYING TO MAKE A SPACE BETWEEN CITY AND DATE:
         $(todayDate).text("\t" + "(" + (moment().format('MM/DD/YYYY')) + ")")
 
         // 5-Day Forecast heading text
