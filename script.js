@@ -210,7 +210,7 @@ $(document).ready(function () {
         console.log(todayDate)
 
         // I AM TRYING TO MAKE A SPACE BETWEEN CITY AND DATE:
-        $(todayDate).text("\t" + "(" + (moment().format('MM/DD/YYYY')) + ")")
+        $(todayDate).text(" " + "(" + (moment().format('MM/DD/YYYY')) + ")")
 
         // 5-Day Forecast heading text
 

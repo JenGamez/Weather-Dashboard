@@ -10,5 +10,8 @@ body
     display: inline-flex;
 }
 
+.city {
+    margin-right: 10px;
+}
 
 
