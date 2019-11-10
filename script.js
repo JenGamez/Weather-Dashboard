@@ -152,6 +152,8 @@ $(document).ready(function () {
                     $(".forecastCards").append("<div class='col-sm-2 cardDay'><p>" + forecastDate + "</p><p>" + conditionImage + "</p><p>" + 'Temp: ' + forecastTemp + '℉' + "</p><p>" + 'Humidity: ' + forecastHumidity + '%' + "</p></div>")
 
                     // I AM NOT DOING THE BELOW RIGHT
+
+                    // $(".forecastCards").empty()
                   
 
                 }
@@ -181,13 +183,14 @@ $(document).ready(function () {
 
         $(".city").text((inputCityName))
 
+
         // Below I want to make inputCityName an H1 or Bold
         // inputCityName.addClass("")
 
         var todayDate = $('.today-date');
         console.log(todayDate)
 
-
+// I AM TRYING TO MAKE A SPACE BETWEEN CITY AND DATE:
         $(todayDate).text("\t" + "(" + (moment().format('MM/DD/YYYY')) + ")")
 
         // 5-Day Forecast heading text
@@ -228,3 +231,4 @@ $(document).ready(function () {
 // Icons for 5-day forecast
 // Clear input box
 // Emplty the 5-day forecast
+// Press enter for search button keyCode === 13
