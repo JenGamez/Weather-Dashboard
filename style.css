@@ -14,4 +14,10 @@ body
     margin-right: 10px;
 }
 
+.card-body-top {
+padding: 20px;
+font-size: 200%;
+font-weight: bold;
+
+}
 

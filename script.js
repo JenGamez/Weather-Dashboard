@@ -30,7 +30,8 @@ $(document).ready(function () {
                 // Log the queryURL
                 console.log(queryURL);
 
-                $(".weather-info").empty()
+                $(".weather-info").empty();
+                $(".condition-image").empty();
 
                 // Log the response object
                 console.log(response);
@@ -78,6 +79,15 @@ $(document).ready(function () {
                 // Append wind to weatherInfo
 
                 weatherInfo.append(wind);
+
+                // Display weather icon
+
+                var iconcodeCurrent = response.weather[0].icon
+                console.log(iconcodeCurrent);
+
+                var iconurlCurrent = "http://openweathermap.org/img/w/" + iconcodeCurrent + ".png";
+
+                $(".condition-image").append('<img src="' + iconurlCurrent + '" />');
 
 
                 // Ending curly bracket for response function 
@@ -143,7 +153,7 @@ $(document).ready(function () {
 
                         // Variables for forecast data:
                         var forecastDate = responseTemp.list[i].dt_txt.slice(0, 10);
-                        // var conditionImage = "Image";
+                        // forecastTemp.moment().format('MM/DD/YYYY');
                         var forecastTemp = responseTemp.list[i].main.temp;
                         var forecastHumidity = responseTemp.list[i].main.humidity;
                         var iconcode = responseTemp.list[i].weather[0].icon;
@@ -151,7 +161,7 @@ $(document).ready(function () {
                         var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
 
                         var cardContent =
-                            "<div class='col-sm-2 cardDay'><p>" +
+                            "<div class='col-sm-2 cardDay'><p class='dateForecast'>" +
                             forecastDate +
                             "</p><p>" +
                             '<img src="' + iconurl + '" />' +
@@ -166,10 +176,16 @@ $(document).ready(function () {
                             "</p></div>";
 
 
+                        // format date 
+
+                        moment(".dateForecast").format('MM/DD/YYYY');
+                        
+
+
+
+                        // cardContent.attr("class", "background-color: blue");
+
                         $(".forecastCards").append(cardContent);
-
-                        // $(".forecastCards").append("<div class='col-sm-2 cardDay'><p>" + forecastDate + "</p><p>" + conditionImage + "</p><p>" + 'Temp: ' + forecastTemp + '℉' + "</p><p>" + 'Humidity: ' + forecastHumidity + '%' + "</p></div>");
-
 
 
 
@@ -203,14 +219,14 @@ $(document).ready(function () {
         $(".city").text((inputCityName))
 
 
-        // Below I want to make inputCityName an H1 or Bold
-        // inputCityName.addClass("")
+        //  Today's date goes next to city
 
         var todayDate = $('.today-date');
         console.log(todayDate)
 
         // I AM TRYING TO MAKE A SPACE BETWEEN CITY AND DATE:
-        $(todayDate).text(" " + "(" + (moment().format('MM/DD/YYYY')) + ")")
+        $(todayDate).text("(" + (moment().format('MM/DD/YYYY')) + ")")
+
 
         // 5-Day Forecast heading text
 
