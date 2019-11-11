@@ -178,7 +178,7 @@ $(document).ready(function () {
 
                         // format date 
 
-                        moment(".dateForecast").format('MM/DD/YYYY');
+                        // moment(".dateForecast").format('MM/DD/YYYY');
                         
 
 
