@@ -5,8 +5,6 @@
 ## https://jengamez.github.io/Weather-Dashboard/
 
 
-## Description
-
 For this project, I created a weather dashboard using data from third-party APIs.  The user story is:
 
 As a traveler

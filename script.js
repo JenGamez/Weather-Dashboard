@@ -128,7 +128,7 @@ $(document).ready(function () {
     // Function to display 5-day forecast temperatures calling OpenWeather:
 
     function fiveDayForecast(inputCityName) {
-        var queryTemp = "http://api.openweathermap.org/data/2.5/forecast?q=" + inputCityName + "&APPID=" + APIKey + "&units=imperial";
+        var queryTemp = "https://api.openweathermap.org/data/2.5/forecast?q=" + inputCityName + "&APPID=" + APIKey + "&units=imperial";
         var queryConditionImage =
 
             // Run AJAX call to the OpenWeatherMap API
