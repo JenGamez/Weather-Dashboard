@@ -153,6 +153,7 @@ $(document).ready(function () {
 
                         // Variables for forecast data:
                         var forecastDate = responseTemp.list[i].dt_txt.slice(0, 10);
+                        console.log(forecastDate);
                         // forecastTemp.moment().format('MM/DD/YYYY');
                         var forecastTemp = responseTemp.list[i].main.temp;
                         var forecastHumidity = responseTemp.list[i].main.humidity;
@@ -232,7 +233,7 @@ $(document).ready(function () {
 
         var fiveDayText = $('#five-day-text')
         console.log(fiveDayText)
-        $(fiveDayText).text("5-Day Forecast: ")
+        $(fiveDayText).text("3-Hour Forecast: ")
 
         // Call functions
 
